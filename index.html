@@ -26,9 +26,23 @@
         transform: translateY(-10px);
       }
     }
+
+    .shayari {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      text-align: right;
+      font-size: 16px;
+      color: #bd1e59;
+      font-style: italic;
+    }
   </style>
 </head>
 <body class="gradient-background">
+  <div class="shayari">
+    <p>"Mohabbat ek ehsaas hai, jo har dil me bas jata hai."</p>
+  </div>
+  
   <div class="flex items-center justify-center h-screen flex-col">
     <div class="flex flex-col items-center p-4">
       <img id="imageDisplay" src="image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
@@ -45,6 +59,8 @@
       </div>
     </div>
     <p class="mt-6 text-gray-500 text-lg font-semibold">Made by Harsha</p>
+    <p class="mt-2 text-gray-600 italic text-md">"Pyaar dosti se shuru hota hai aur wafadari par khatam."</p>
+  </div>
   </div>
 
   <script type="module">
@@ -59,6 +75,13 @@
     let buttonHeight = 48;
     let buttonWidth = 80;
     let fontSize = 20;
+   const shayaris = [
+      "Mohabbat ek ehsaas hai, jo har dil me bas jata hai.",
+      "Pyaar sirf lafzon ka mohtaj nahi, dil ke jazbaat ki bhi zaroorat hoti hai.",
+      "Ek muskurahat ki keemat tum kya jano, mohabbat ka sukoon hai isme.",
+      "Teri aankhon ka jaadu, har baar mujhe mohabbat ka ehsaas dilata hai.",
+      "Dil se nikli baatein, sirf ek sacche humsafar hi samajh sakte hain."
+    ];
     const imagePaths = [
       "image1.gif",
       "image2.gif",
