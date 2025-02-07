@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .gradient-background {
-      background: rgb(255, 208, 229);
       background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
     }
 
@@ -16,15 +15,9 @@
     }
 
     @keyframes bounce2 {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-20px);
-      }
-      60% {
-        transform: translateY(-10px);
-      }
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
     }
 
     .shayari {
@@ -32,9 +25,10 @@
       top: 10px;
       right: 20px;
       text-align: right;
-      font-size: 16px;
+      font-size: 18px;
       color: #bd1e59;
       font-style: italic;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -45,15 +39,15 @@
   
   <div class="flex items-center justify-center h-screen flex-col">
     <div class="flex flex-col items-center p-4">
-      <img id="imageDisplay" src="image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
+      <img id="imageDisplay" src="image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px] object-cover" />
       <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Will you be my Valentine?</h2>
       <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
         <button id="yesButton"
-          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
           Yes
         </button>
         <button id="noButton"
-          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition hover:bg-red-700 h-12 min-w-[75px] px-4 py-2 bg-red-500 text-white">
           No
         </button>
       </div>
@@ -64,6 +58,8 @@
 
   <script type="module">
     import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    
+    // Elements
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
     const imageDisplay = document.getElementById('imageDisplay');
@@ -81,8 +77,7 @@
       "Pyaar sirf lafzon ka mohtaj nahi, dil ke jazbaat ki bhi zaroorat hoti hai.",
       "Ek muskurahat ki keemat tum kya jano, mohabbat ka sukoon hai isme.",
       "Teri aankhon ka jaadu, har baar mujhe mohabbat ka ehsaas dilata hai.",
-      "Dil se nikli baatein, sirf ek sacche humsafar hi samajh sakte hain.",
-      "Dua bankar milenge, bas dil se pukaro humein.",
+      "Dil se nikli baatein, sirf ek sacche humsafar hi samajh sakte hain."
     ];
     
     const imagePaths = [
@@ -91,18 +86,27 @@
       "image3.gif",
       "image4.gif",
       "image5.gif",
-      "image6.gif",
+      "image6.gif"
+    ];
+  
+    const noButtonTexts = [
+      "No", 
+      "Are you sure?", 
+      "Pookie please", 
+      "Don't do this to me :(", 
+      "You're breaking my heart", 
+      "I'm gonna cry..."
     ];
 
     noButton.addEventListener('click', function() {
-      if (noClickCount < imagePaths.length - 1) {
+      if (noClickCount < 5) {
         noClickCount++;
-        
+
         // Update Image
         imageDisplay.src = imagePaths[noClickCount];
 
         // Update Shayari
-        shayariText.textContent = shayaris[noClickCount % shayaris.length];
+        shayariText.textContent = shayaris[noClickCount];
 
         // Increase "Yes" button size dynamically
         buttonHeight += 35;
@@ -113,21 +117,12 @@
         yesButton.style.fontSize = `${fontSize}px`;
 
         // Change "No" button text gradually
-        if (noClickCount < 4) {
-          noButton.textContent = [
-            "No", 
-            "Are you sure?", 
-            "Pookie please", 
-            "Don't do this to me :(", 
-            "You're breaking my heart", 
-            "I'm gonna cry..."
-          ][noClickCount];
-        }
+        noButton.textContent = noButtonTexts[noClickCount];
       }
     });
 
     yesButton.addEventListener('click', () => {
-      imageDisplay.src = 'image7.gif';
+      imageDisplay.src = 'image6.gif';
       valentineQuestion.textContent = "Yayyy!! :3";
       responseButtons.style.display = 'none';
       confetti();
