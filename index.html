@@ -101,6 +101,9 @@
       "I'm gonna cry..."
     ];
 
+     // Special Shayari when "Yes" is clicked
+    const yesShayari = "Teri hasi meri jaan hai, tera pyaar meri pehchaan hai. ❤️";
+
     noButton.addEventListener('click', function() {
       if (noClickCount < 5) {
         noClickCount++;
@@ -130,6 +133,7 @@
       responseButtons.style.display = 'none';
       confetti();
 
+           // Change Shayari when "Yes" is clicked
       shayariText.textContent = yesShayari;
       finalShayari.textContent = "Sath chalenge har mod pe, har pal teri yaadon me. 💕";
     });
