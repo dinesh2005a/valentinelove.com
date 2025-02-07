@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentines Day</title>
+  <title>Valentine's Day</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .gradient-background {
@@ -40,7 +40,7 @@
 </head>
 <body class="gradient-background">
   <div class="shayari">
-    <p>"Mohabbat ek ehsaas hai, jo har dil me bas jata hai."</p>
+    <p id="shayariText">"Mohabbat ek ehsaas hai, jo har dil me bas jata hai."</p>
   </div>
   
   <div class="flex items-center justify-center h-screen flex-col">
@@ -61,7 +61,6 @@
     <p class="mt-6 text-gray-500 text-lg font-semibold">Made by Harsha</p>
     <p class="mt-2 text-gray-600 italic text-md">"Pyaar dosti se shuru hota hai aur wafadari par khatam."</p>
   </div>
-  </div>
 
   <script type="module">
     import confetti from 'https://cdn.skypack.dev/canvas-confetti';
@@ -70,17 +69,21 @@
     const imageDisplay = document.getElementById('imageDisplay');
     const valentineQuestion = document.getElementById('valentineQuestion');
     const responseButtons = document.getElementById('responseButtons');
-  
+    const shayariText = document.getElementById('shayariText');
+
     let noClickCount = 0;
     let buttonHeight = 48;
     let buttonWidth = 80;
     let fontSize = 20;
-   const shayaris = [
+
+    const shayaris = [
       "Mohabbat ek ehsaas hai, jo har dil me bas jata hai.",
       "Pyaar sirf lafzon ka mohtaj nahi, dil ke jazbaat ki bhi zaroorat hoti hai.",
       "Ek muskurahat ki keemat tum kya jano, mohabbat ka sukoon hai isme.",
       "Teri aankhon ka jaadu, har baar mujhe mohabbat ka ehsaas dilata hai.",
-      "Dil se nikli baatein, sirf ek sacche humsafar hi samajh sakte hain."
+      "Dil se nikli baatein, sirf ek sacche humsafar hi samajh sakte hain.",
+      "Meri mohabbat sirf lafzon tak simat kar nahi reh sakti, isme ek ehsaas bhi chhupa hai.",
+      "Har saans mein tu, har pal mein tera ehsaas."
     ];
     
     const imagePaths = [
@@ -92,23 +95,39 @@
       "image6.gif",
       "image7.gif"
     ];
-  
+
     noButton.addEventListener('click', function() {
-      if (noClickCount < 5) {
+      if (noClickCount < imagePaths.length - 1) {
         noClickCount++;
+        
+        // Update Image
         imageDisplay.src = imagePaths[noClickCount];
+
+        // Update Shayari
+        shayariText.textContent = shayaris[noClickCount % shayaris.length];
+
+        // Increase "Yes" button size dynamically
         buttonHeight += 35;
         buttonWidth += 35;
         fontSize += 25;
         yesButton.style.height = `${buttonHeight}px`;
         yesButton.style.width = `${buttonWidth}px`;
         yesButton.style.fontSize = `${fontSize}px`;
+
+        // Change "No" button text gradually
         if (noClickCount < 6) {
-          noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
+          noButton.textContent = [
+            "No", 
+            "Are you sure?", 
+            "Pookie please", 
+            "Don't do this to me :(", 
+            "You're breaking my heart", 
+            "I'm gonna cry..."
+          ][noClickCount];
         }
       }
     });
-  
+
     yesButton.addEventListener('click', () => {
       imageDisplay.src = 'image7.gif';
       valentineQuestion.textContent = "Yayyy!! :3";
